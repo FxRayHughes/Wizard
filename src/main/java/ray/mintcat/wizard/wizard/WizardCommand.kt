@@ -31,7 +31,7 @@ class WizardCommand : BaseMainCommand() {
             sender.sendMessage(Wizard.getTitle()
                     + "§7目标 §f" + args[0] + " §7的 §f"
                     + args[1] + "§7 变量为§f "
-                    + WizardObject.getIntegral(player, args[1], "不存在").toString())
+                    + WizardObject.getIntegral(player).toString())
         }
     }
 
@@ -71,7 +71,7 @@ class WizardCommand : BaseMainCommand() {
                 sender.sendMessage(Wizard.getTitle() + "§7目标 §f" + args[0] + " §7离线.")
                 return
             }
-            WizardObject.addIntegral(player, args[1], args[2].toInt())
+            WizardObject.addIntegral(player, args[2].toInt())
         }
     }
 
@@ -91,7 +91,7 @@ class WizardCommand : BaseMainCommand() {
                 sender.sendMessage(Wizard.getTitle() + "§7目标 §f" + args[0] + " §7离线.")
                 return
             }
-            WizardObject.takeIntegral(player, args[1], args[2].toInt())
+            WizardObject.takeIntegral(player, args[2].toInt())
         }
     }
 }

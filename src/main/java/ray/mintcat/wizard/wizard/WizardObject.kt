@@ -1,29 +1,36 @@
 package ray.mintcat.wizard.wizard
 
-import io.izzel.taboolib.module.db.local.LocalPlayer
 import org.bukkit.entity.Player
+import java.sql.PreparedStatement
 
 object WizardObject {
+    var getPlayer: PreparedStatement = WizardSql.CONNECTION.prepareStatement("SELECT Value FROM Wizard WHERE PlayerName = ?")
+    var setPlayer: PreparedStatement = WizardSql.CONNECTION.prepareStatement("UPDATE Wizard SET Value = ? WHERE PlayerName = ?")
 
-    fun getIntegral(player: Player?, integral: Any, def: Any): Any {
-        val yaml = LocalPlayer.get(player)
-        return yaml["Wizard.list.$integral", def] ?: def
+
+    fun getIntegral(player: Player?): Any {
+        getPlayer.setString(1,player?.name)
+        val executeQuery = getPlayer.executeQuery()
+        return executeQuery.getString("Value")
     }
 
     fun setIntegral(player: Player, integral: Any, value: Any) {
-        val yaml = LocalPlayer.get(player)
-        yaml["Wizard.list.$integral"] = value
+        setPlayer.setInt(1, value as Int)
+        setPlayer.setString(2,player.name)
+        setPlayer.executeUpdate()
     }
 
-    fun addIntegral(player: Player, integral: Any, value: Int) {
-        val yaml = LocalPlayer.get(player)
-        val info = yaml.getInt("Wizard.list.$integral", 0)
-        yaml["Wizard.list.$integral"] = info + value
+    fun addIntegral(player: Player, value: Int) {
+        getPlayer.setString(1,player.name)
+        setPlayer.setInt(1,getPlayer.executeQuery().getInt("Value")+value)
+        setPlayer.setString(2,player.name)
+        setPlayer.executeUpdate()
     }
 
-    fun takeIntegral(player: Player, integral: Any, value: Int) {
-        val yaml = LocalPlayer.get(player)
-        val info = yaml.getInt("Wizard.list.$integral", 0)
-        yaml["Wizard.list.$integral"] = info - value
+    fun takeIntegral(player: Player, value: Int) {
+        getPlayer.setString(1,player.name)
+        setPlayer.setInt(1,getPlayer.executeQuery().getInt("Value")-value)
+        setPlayer.setString(2,player.name)
+        setPlayer.executeUpdate()
     }
 }
