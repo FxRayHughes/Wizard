@@ -51,7 +51,7 @@ class WizardCommand : BaseMainCommand() {
                 sender.sendMessage(Wizard.getTitle() + "§7目标 §f" + args[0] + " §7离线.")
                 return
             }
-            WizardObject.setIntegral(player, args[1], args[2])
+            WizardObject.setIntegral(player, args[2])
         }
     }
 
