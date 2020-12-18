@@ -1,12 +1,6 @@
-# 链接网址（去掉https://）
-DB_URL: "localhost"
-# 链接端口
-PORT: "3306"
-# 账户名
-USER: "root"
-# 账户密码
-PASSWORD: "123456"
-# 链接参数，使用?分割
-PARAMETER: "useSSL=false"
-# 库名
-TABLE: "root"
+Database:
+  method: LOCAL
+  url:
+    client: 'mongodb://localhost:3307'
+    database: test
+    collection: adyeshach

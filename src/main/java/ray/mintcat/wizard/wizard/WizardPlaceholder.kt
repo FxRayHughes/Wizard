@@ -35,13 +35,13 @@ class WizardPlaceholder : PlaceholderExpansion() {
             }
             "info" -> {
                 //%konintegral_info_key_def% ?
-                getIntegral(player).toString()
+                getIntegral(player, param[1], param[2]).toString()
             }
             "has" -> {
 
                 //%wizard_has_key_value_yes_no% ?
                 //              0   1   2     3   4
-                val value = getIntegral(player) as Int
+                val value = getIntegral(player, param[1], "0") as Int
                 if (value >= param[2].toInt()) {
                     param[3]
                 } else {
@@ -52,7 +52,7 @@ class WizardPlaceholder : PlaceholderExpansion() {
 
                 //%wizard_is_key_value_yes_no% ?
                 //              0   1   2     3   4
-                val value = getIntegral(player) as String
+                val value = getIntegral(player, param[1], param[2]) as String
                 if (value.equals(param[2], ignoreCase = true)) {
                     param[3]
                 } else {
